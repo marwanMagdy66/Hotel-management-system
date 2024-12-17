@@ -32,14 +32,12 @@ def searching(id):
 
 
 def Update_info(id, name, email, phone, paymentMethod):
-    # Try to find the customer by _id
     customer = customers_collection.find_one({"_id": ObjectId(id)})
     
     if customer:
-        # Perform the update operation
         result = customers_collection.update_one(
-            {"_id": ObjectId(id)},  # filter
-            {"$set": {               # update operation
+            {"_id": ObjectId(id)},  
+            {"$set": {               
                 "name": name,
                 "email": email,
                 "phone": phone,
@@ -47,7 +45,6 @@ def Update_info(id, name, email, phone, paymentMethod):
             }}
         )
         
-        # Check if the update was successful
         if result.modified_count > 0:
             print(f"Customer updated successfully:\nName: {name}\nEmail: {email}\nPhone: {phone}\nPayment Method: {paymentMethod}")
         else:

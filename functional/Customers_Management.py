@@ -2,34 +2,28 @@ from DBConnection import customers_collection
 from bson import ObjectId
 
 
-# Fetch all customers from the database
 def fetch_customers():
     return list(customers_collection.find())
 
 
-# Save customers to the database
 def save_customers(customers):
     customers_collection.delete_many({})
     customers_collection.insert_many(customers)
 
 
-# Validate payment method (pure function)
 def validate_payment_method(payment_method):
     return payment_method.lower() in ["visa", "cash"]
 
 
-# Add a new customer
 def add_customer(name, email, phone, payment_method):
     if not validate_payment_method(payment_method):
         return "Invalid payment method. Please choose 'visa' or 'cash'."
 
     customers = fetch_customers()
 
-    # Check if customer already exists
     if any(customer["email"] == email for customer in customers):
         return f"Customer with email {email} already exists."
 
-    # Create new customer
     new_customer = {
         "name": name,
         "email": email,
@@ -37,20 +31,21 @@ def add_customer(name, email, phone, payment_method):
         "paymentMethod": payment_method
     }
 
-    # Append customer immutably
+    #  immutably
     save_customers(customers + [new_customer])
     return "Customer added successfully!"
 
 
-# List all customers
+
 def list_customers():
-    return list(map(
+    return "\n".join(map( #higher order function
         lambda customer: (
             f"Name: {customer['name']}, Email: {customer['email']}, "
             f"Phone: {customer['phone']}, Payment Method: {customer['paymentMethod']}"
         ),
         fetch_customers()
     ))
+
 
 
 def search_customer_by_id(customer_id):

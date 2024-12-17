@@ -48,10 +48,27 @@ def generate_bill(customer_name, room_number, services=None, tax_rate=0.1, disco
         }
     }
     
-    # Insert the bill data into the database
     Bill_collection.insert_one(bill_data)
-    
+ 
     return bill_data
+
+def print_bill(bill_data):
+         
+    print("\n--- BILL ---")
+    print(f"Customer Name: {bill_data['customerName']}")
+    print(f"Room Number: {bill_data['roomNumber']}")
+    print("\n--- Breakdown ---")
+    print(f"Room Cost: ${bill_data['details']['roomCost']:.2f}")
+    
+    print(f"Additional Services: ${bill_data['details']['additionalServices']:.2f}")
+
+    
+    print(f"Subtotal: ${bill_data['details']['subtotal']:.2f}")
+    print(f"Tax: ${bill_data['details']['tax']:.2f}")
+    print(f"Discount: -${bill_data['details']['discount']:.2f}")
+    print(f"Total: ${bill_data['details']['total']:.2f}")
+    print("\nThank you for your stay!\n")
+
 
 def insert_bill_to_db(bill_data):
     Bill_collection.insert_one(bill_data)

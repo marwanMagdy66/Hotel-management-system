@@ -1,4 +1,8 @@
 from DBConnection import Bill_collection,rooms_collection,reservations_collection
+
+
+
+
 def generate_Bill(customer_name,room_number,services=None,tax_rate=0.1, discount=0):
     room=rooms_collection.find_one({"roomNumber":room_number})
     if not room:

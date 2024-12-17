@@ -12,7 +12,7 @@ from report import *
 
 # print(booking_room(106))
 # print(release2_room(101))
-# print(list_rooms())
+print(list_rooms())
 #########################################################
 
 # ############## customers management #############
@@ -33,8 +33,8 @@ from report import *
 
 ##############Bill##############
 
-# print(generate_bill('ali',105,['meals','laundry'],.2,10))
-
+# bill=generate_bill('ali',105,['meals','laundry'],.2,10)
+# print_bill(bill)  
 ############ reports###########
 # generate_occupancy_report()
 # generate_revenue_report()

@@ -33,11 +33,11 @@ def is_room_available(room):
     return room.get('availability', False)
 
 
-def book_room(room):
+def book_room(room): #Immutable
     return {**room, "availability": False}
 
 
-def release_room(room):
+def release_room(room):   #Immutable
     return {**room, "availability": True}
 
 
@@ -68,8 +68,10 @@ def update_room_availability(room_number, availability):
     )
 
 
+
+
 def book_reservation_and_update_db(customer_id, room_number, check_in, check_out):
-    reservation = add_reservation(customer_id, room_number, check_in, check_out)
+    reservation = add_reservation(customer_id, room_number, check_in, check_out) #first class function
 
     if isinstance(reservation, str):
         return reservation
@@ -84,10 +86,10 @@ def book_reservation_and_update_db(customer_id, room_number, check_in, check_out
     return "Reservation added successfully."
 
 
-def list_reservations():
+def list_reservations():  
     reservations = reservations_collection.find()
 
-    return list(map(
+    return "\n".join(map( #Highter-order functions
         lambda res: (
             f"Customer: {res['customerName']}, Email: {res['customerEmail']},\n"
             f"Phone: {res['customerPhone']}, Room: {res['roomNumber']},\n"

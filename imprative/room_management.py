@@ -1,4 +1,7 @@
 from DBConnection import rooms_collection
+
+
+
 def add_room(room_number,room_type,price):
     valid_room_type=['single','double','suite']
     if room_type not in valid_room_type:
@@ -13,6 +16,10 @@ def add_room(room_number,room_type,price):
     
     rooms_collection.insert_one(room)
     print("room added successfully !")
+
+
+
+
 
 
 #show all rooms 
